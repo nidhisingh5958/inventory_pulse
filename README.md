@@ -1,4 +1,4 @@
-# 🤖 Inventory Replenishment Copilot
+# 🤖 Inventory Pulse
 
 AI-powered inventory management system with automated forecasting, reorder planning, and approval workflows using Google Sheets, Notion, and Gmail integration via Composio.
 
