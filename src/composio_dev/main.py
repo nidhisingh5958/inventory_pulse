@@ -1,10 +1,12 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from typing import List, Dict
+from sqlalchemy.orm import Session
 import os
 from dotenv import load_dotenv
 from models import InventoryItem, ReorderPlan, ApprovalRequest
 from services.inventory_service import InventoryService
+from database import get_db, init_db
 
 load_dotenv()
 
@@ -22,7 +24,14 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Initialize service
+# Initialize database on startup
+@app.on_event("startup")
+async def startup_event():
+    """Initialize database tables on application startup."""
+    init_db()
+    print("✅ Database initialized successfully")
+
+# Initialize service (no longer needs to maintain state)
 inventory_service = InventoryService()
 
 # Configuration
@@ -48,29 +57,29 @@ async def health_check():
     return {"status": "healthy", "service": "Inventory Replenishment Copilot"}
 
 @app.post("/inventory/sync")
-async def sync_inventory():
-    result = await inventory_service.sync_inventory(SPREADSHEET_ID)
+async def sync_inventory(db: Session = Depends(get_db)):
+    result = await inventory_service.sync_inventory(SPREADSHEET_ID, db)
     if result["status"] == "error":
         raise HTTPException(status_code=500, detail=result["message"])
     return result
 
 @app.get("/inventory/status")
-async def get_inventory_status():
-    return inventory_service.get_inventory_summary()
+async def get_inventory_status(db: Session = Depends(get_db)):
+    return inventory_service.get_inventory_summary(db)
 
 @app.post("/forecast/generate")
-async def generate_forecasts(forecast_days: int = 30):
+async def generate_forecasts(forecast_days: int = 30, db: Session = Depends(get_db)):
     try:
-        forecasts = await inventory_service.generate_forecasts(forecast_days)
+        forecasts = await inventory_service.generate_forecasts(db, forecast_days)
         return {"forecasts": forecasts, "count": len(forecasts)}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Forecast generation failed: {str(e)}")
 
 @app.post("/reorder/create-plans")
-async def create_reorder_plans(forecast_days: int = 30):
+async def create_reorder_plans(forecast_days: int = 30, db: Session = Depends(get_db)):
     try:
-        forecasts = await inventory_service.generate_forecasts(forecast_days)
-        plans = await inventory_service.create_reorder_plans(forecasts, NOTION_DATABASE_ID)
+        forecasts = await inventory_service.generate_forecasts(db, forecast_days)
+        plans = await inventory_service.create_reorder_plans(forecasts, NOTION_DATABASE_ID, db)
         
         return {
             "message": f"Created {len(plans)} reorder plans",
@@ -81,15 +90,33 @@ async def create_reorder_plans(forecast_days: int = 30):
         raise HTTPException(status_code=500, detail=f"Failed to create reorder plans: {str(e)}")
 
 @app.post("/approval/send")
-async def send_approval_requests():
+async def send_approval_requests(db: Session = Depends(get_db)):
     try:
-        pending_plans = []
-        for plan_data in inventory_service.reorder_plans.values():
-            if plan_data["status"] == "pending":
-                pending_plans.append(plan_data["plan"])
+        from database import crud
         
-        if not pending_plans:
+        # Get pending plans from database
+        db_plans = crud.get_pending_reorder_plans(db)
+        
+        if not db_plans:
             return {"message": "No pending plans to approve"}
+        
+        # Convert database plans to Pydantic models
+        pending_plans = []
+        for db_plan in db_plans:
+            product = crud.get_product_by_id(db, db_plan.product_id)
+            if product:
+                plan = ReorderPlan(
+                    item_id=product.item_id,
+                    item_name=product.name,
+                    current_stock=product.current_stock,
+                    predicted_depletion_date=db_plan.predicted_depletion_date or "",
+                    recommended_order_quantity=db_plan.recommended_order_quantity,
+                    supplier=product.supplier or "",
+                    estimated_cost=db_plan.estimated_cost or 0.0,
+                    priority=db_plan.priority,
+                    justification=db_plan.justification or ""
+                )
+                pending_plans.append(plan)
         
         result = await inventory_service.send_approval_requests(pending_plans, APPROVER_EMAIL)
         
@@ -101,18 +128,18 @@ async def send_approval_requests():
         raise HTTPException(status_code=500, detail=f"Failed to send approval requests: {str(e)}")
 
 @app.post("/workflow/auto-replenishment")
-async def run_auto_replenishment_workflow():
+async def run_auto_replenishment_workflow(db: Session = Depends(get_db)):
     try:
         # Step 1: Sync inventory
-        sync_result = await inventory_service.sync_inventory(SPREADSHEET_ID)
+        sync_result = await inventory_service.sync_inventory(SPREADSHEET_ID, db)
         if sync_result["status"] == "error":
             raise HTTPException(status_code=500, detail=sync_result["message"])
         
         # Step 2: Generate forecasts
-        forecasts = await inventory_service.generate_forecasts(30)
+        forecasts = await inventory_service.generate_forecasts(db, 30)
         
         # Step 3: Create reorder plans
-        plans = await inventory_service.create_reorder_plans(forecasts, NOTION_DATABASE_ID)
+        plans = await inventory_service.create_reorder_plans(forecasts, NOTION_DATABASE_ID, db)
         
         # Step 4: Send approval requests for high priority items
         high_priority_plans = [p for p in plans if p.priority.value == "High"]
@@ -137,16 +164,28 @@ async def run_auto_replenishment_workflow():
         raise HTTPException(status_code=500, detail=f"Workflow failed: {str(e)}")
 
 @app.get("/reorder/plans")
-async def get_reorder_plans():
+async def get_reorder_plans(db: Session = Depends(get_db)):
+    from database import crud
+    
+    db_plans = crud.get_pending_reorder_plans(db)
+    
     plans_data = []
-    for item_id, plan_data in inventory_service.reorder_plans.items():
-        plans_data.append({
-            "item_id": item_id,
-            "plan": plan_data["plan"],
-            "status": plan_data["status"],
-            "notion_page_id": plan_data.get("notion_page_id"),
-            "created_at": plan_data.get("created_at")
-        })
+    for db_plan in db_plans:
+        product = crud.get_product_by_id(db, db_plan.product_id)
+        if product:
+            plans_data.append({
+                "id": db_plan.id,
+                "item_id": product.item_id,
+                "item_name": product.name,
+                "current_stock": product.current_stock,
+                "predicted_depletion_date": db_plan.predicted_depletion_date,
+                "recommended_order_quantity": db_plan.recommended_order_quantity,
+                "estimated_cost": db_plan.estimated_cost,
+                "priority": db_plan.priority,
+                "status": db_plan.status,
+                "notion_page_id": db_plan.notion_page_id,
+                "created_at": db_plan.created_at
+            })
     
     return {"plans": plans_data, "count": len(plans_data)}
 
