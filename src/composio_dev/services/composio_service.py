@@ -1,5 +1,5 @@
 import os
-from typing import List, Dict, Optional
+from typing import List, Optional
 from models import InventoryItem, ReorderPlan
 
 class ComposioService:
