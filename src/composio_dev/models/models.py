@@ -8,6 +8,16 @@ class PriorityLevel(str, Enum):
     MEDIUM = "Medium"
     LOW = "Low"
 
+class UserDetails(BaseModel):
+    user_id: str
+    name: str
+    email: str
+
+class GmailServiceResponse(BaseModel):
+    recipient_email: str
+    subject: str
+    body: str
+
 class InventoryItem(BaseModel):
     item_id: str
     name: str

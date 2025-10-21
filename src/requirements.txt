@@ -1,0 +1,14 @@
+fastapi
+uvicorn
+pydantic
+python-dotenv
+groq
+requests
+python-multipart
+google-genai
+composio_google
+composio-gemini
+composio
+composio_core
+composio_tools
+aioredis
