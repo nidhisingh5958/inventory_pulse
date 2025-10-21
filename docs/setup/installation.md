@@ -61,10 +61,6 @@ COMPOSIO_GMAIL_ACCOUNT_ID=your_gmail_auth_config_id
 # AI Configuration
 GEMINI_API_KEY=your_gemini_api_key
 
-# Optional: Logging (if using Watchman)
-WATCHMAN_ACCESS_TOKEN=your_watchman_token
-WATCHMAN_ACCOUNT_ID=your_watchman_account
-
 # Application Configuration
 SPREADSHEET_ID=your_google_sheets_id
 NOTION_DATABASE_ID=your_notion_database_id

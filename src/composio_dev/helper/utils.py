@@ -16,8 +16,6 @@ load_dotenv()
 USER_ID = os.getenv("COMPOSIO_USER_ID", "default-user")  # Use a unique user ID for your app
 toolset = ComposioToolSet(entity_id=USER_ID)
 
-LOGGER_SERVICE = 'composio'
-LOGGER_INTEGRATION = 'composio logs'
 
 # Auth Config ID from your Composio dashboard
 # You should have created this in the Composio dashboard for Gmail
@@ -96,32 +94,8 @@ config = types.GenerateContentConfig(tools=tools)
 # Use the chat interface.
 chat = gemini_client.chats.create(model="gemini-2.0-flash", config=config)
 
-
-def logger(service, integration, level, priority, message):
-    try:
-        res = requests.post(
-            "http://logger:1027/logger/log",
-            json={
-                "account_id": os.getenv("WATCHMAN_ACCOUNT_ID"),
-                "service": service,
-                "integration": integration,
-                "level": level,
-                "priority": priority,
-                "message": message
-            },
-            headers={
-                "WATCHMAN-API-KEY": os.getenv("WATCHMAN_ACCESS_TOKEN"),
-                "Content-Type": "application/json"
-            },
-            timeout=5
-        )
-        return res.status_code == 200
-    except Exception as e:
-        print(f"Logger error: {e}")
-        return False
     
 def gemini_draft_email(recipient_email: str, context: str):
-    # logger(LOGGER_SERVICE, LOGGER_INTEGRATION, "INFO", "null", "Drafting email via Gemini and Composio")
 
     # Send message asking Gemini to send an email with correct parameter names
     response = chat.send_message(f"""

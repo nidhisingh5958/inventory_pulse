@@ -36,12 +36,6 @@ COMPOSIO_GMAIL_ACCOUNT_ID=your_gmail_auth_config_id_here
 GEMINI_API_KEY=your_gemini_api_key_here
 
 # =============================================================================
-# EXTERNAL LOGGING (OPTIONAL)
-# =============================================================================
-WATCHMAN_ACCESS_TOKEN=your_watchman_token_here
-WATCHMAN_ACCOUNT_ID=your_watchman_account_here
-
-# =============================================================================
 # APPLICATION CONFIGURATION
 # =============================================================================
 SPREADSHEET_ID=your_google_sheets_id_here
