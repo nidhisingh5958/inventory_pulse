@@ -19,11 +19,33 @@ pip install -r requirements.txt
 
 ### 2. Install Redis
 
+### Instructions for Docker:
+
 ```bash
 # Run this command to start Redis Stack in detached mode:
 docker run -d --name redis-stack -p 6379:6379 -p 8001:8001 redis/redis-stack:latest
 # access Redis Stack at 👉 http://localhost:8001
 ```
+
+### Instructions for Local Installation:
+
+**Windows:**
+```bash
+# Using Chocolatey
+choco install redis-64
+
+# Or download from: https://github.com/microsoftarchive/redis/releases
+```
+
+**Linux/Mac:**
+```bash
+# Ubuntu/Debian
+sudo apt-get install redis-server
+
+# macOS
+brew install redis
+```
+
 
 ### 3. Environment Configuration
 
