@@ -10,6 +10,16 @@ AI-powered inventory management system with automated forecasting, reorder plann
 - **📧 Gmail Notifications**: Approval request automation
 - **🔄 Complete Workflow**: End-to-end automation
 
+# Project Artefacts
+
+## Technical Documentation
+[Technical Docs](/docs/README.md)  
+*All technical details are documented in markdown files, including system architecture, implementation details.*
+
+## Source Code
+[GitHub Repository](https://github.com/nidhisingh5958/inventory_pulse/tree/main/src)  
+*Complete backend source code with all modules, dependencies, and configurations for successful installation and execution.*
+
 ## 📦 Quick Start
 
 1. **Install Dependencies**
