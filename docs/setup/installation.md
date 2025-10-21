@@ -13,60 +13,25 @@
 ### 1. Clone and Setup Project
 
 ```bash
-cd inventory_pulse_dev
+cd inventory_pulse_dev/src
 pip install -r requirements.txt
 ```
 
 ### 2. Install Redis
 
-**Windows:**
 ```bash
-# Using Chocolatey
-choco install redis-64
-
-# Or download from: https://github.com/microsoftarchive/redis/releases
+# Run this command to start Redis Stack in detached mode:
+docker run -d --name redis-stack -p 6379:6379 -p 8001:8001 redis/redis-stack:latest
+# access Redis Stack at 👉 http://localhost:8001
 ```
 
-**Linux/Mac:**
-```bash
-# Ubuntu/Debian
-sudo apt-get install redis-server
+### 3. Environment Configuration
 
-# macOS
-brew install redis
+``` bash
+# Copy the .env.sample file to .env and fill in the required values.
 ```
 
-### 3. Start Redis Server
-
-```bash
-redis-server
-```
-
-Verify Redis is running:
-```bash
-redis-cli ping
-# Should return: PONG
-```
-
-### 4. Environment Configuration
-
-Create `.env` file in project root:
-
-```env
-# Composio Configuration
-COMPOSIO_API_KEY=your_composio_api_key
-COMPOSIO_USER_ID=your_unique_user_id
-COMPOSIO_GMAIL_ACCOUNT_ID=your_gmail_auth_config_id
-
-# AI Configuration
-GEMINI_API_KEY=your_gemini_api_key
-
-# Application Configuration
-SPREADSHEET_ID=your_google_sheets_id
-NOTION_DATABASE_ID=your_notion_database_id
-```
-
-### 5. Verify Installation
+### 4. Verify Installation
 
 Run the test suite:
 ```bash
@@ -102,26 +67,6 @@ pytest-asyncio>=0.21.0
 ```
 
 ## 🔍 Troubleshooting
-
-### Common Issues
-
-**Redis Connection Error:**
-```bash
-# Check if Redis is running
-redis-cli ping
-
-# Start Redis if not running
-redis-server
-```
-
-**Import Errors:**
-```bash
-# Ensure you're in the project directory
-cd inventory_pulse_dev
-
-# Check Python path
-python -c "import sys; print(sys.path)"
-```
 
 **Composio Authentication:**
 ```bash
