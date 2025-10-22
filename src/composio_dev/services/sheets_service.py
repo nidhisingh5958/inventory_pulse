@@ -100,6 +100,62 @@ class SheetsService:
         except Exception as e:
             return {"error": f"Failed to update stock: {str(e)}"}
     
+    def create_new_stock_entry(self, spreadsheet_id: str, item_data: dict):
+        """Create a new stock entry in the inventory sheet"""
+        if not self.connected:
+            return {"error": "Google Sheets not connected"}
+        
+        try:
+            # Step 1: Read the existing data to find the last filled row
+            read_result = self.toolset.execute_action(
+                action="GOOGLESHEETS_BATCH_GET",
+                params={
+                    "spreadsheet_id": spreadsheet_id,
+                    "ranges": ["Sheet1!A:A"],  # Adjust the range with the correct sheet name
+                    "valueRenderOption": "FORMATTED_VALUE"
+                }
+            )
+
+            print("read_result:", read_result)
+
+            # Step 2: Determine the last filled row
+            if 'valueRanges' in read_result and read_result['valueRanges']:
+                last_filled_row = len(read_result['valueRanges'][0].get('values', []))  # Use get to avoid KeyError
+                print("last_filled_row:", last_filled_row)
+            else:
+                last_filled_row = 0  # No data found, start from the first row
+
+            # Step 3: Prepare the new row data
+            row_values = [
+                item_data.get("item_id", ""),
+                item_data.get("item_name", ""),
+                item_data.get("current_stock", 0),
+                item_data.get("min_threshold", 0),
+                item_data.get("daily_usage", 0),
+                item_data.get("supplier", ""),
+                item_data.get("unit_cost", 0)
+            ]
+            print("row_values:", row_values)
+            
+            # Step 4: Add the new row
+            update_result = self.toolset.execute_action(
+                action="GOOGLESHEETS_BATCH_UPDATE",
+                params={
+                    "spreadsheet_id": spreadsheet_id,
+                    "sheet_name": "Sheet1",  # Ensure this matches your sheet name
+                    "first_cell_location": f"A{last_filled_row + 1}",  # Start from the next empty row
+                    "valueInputOption": "USER_ENTERED",
+                    "values": [row_values]
+                }
+            )
+
+            print("update_result:", update_result)
+
+            return update_result
+        except Exception as e:
+            return {"error": f"Failed to create new stock entry: {str(e)}"}
+
+
     def track_stock_changes(self, spreadsheet_id: str):
         """Track and return items with low stock"""
         data = self.get_inventory_data(spreadsheet_id)

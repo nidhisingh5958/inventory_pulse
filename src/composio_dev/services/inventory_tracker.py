@@ -55,8 +55,8 @@ class InventoryTracker:
                 "item_name": item["item_name"],
                 "new_stock_left": item["current_stock"],
                 "demand": 100,
-                "supplier": 'Jhon Doe',  # Placeholder supplier name
-                "email": 'ABC@gmail.com'  # Placeholder supplier email
+                "supplier": 'Nidhi Singh',  # Placeholder supplier name
+                "email": 'nidhisingh5958@gmail.com'  # Placeholder supplier email
             }
             await redis_client.publish("low_stock_alerts", json.dumps(alert_data))
         
@@ -69,7 +69,12 @@ class InventoryTracker:
         """Update stock level for specific item"""
         result = self.sheets_service.update_stock(self.spreadsheet_id, item_row, new_stock)
         return result
-    
+
+    def create_new_stock_entry(self, item_data: dict):
+        """Create a new stock entry in the inventory sheet"""
+        result = self.sheets_service.create_new_stock_entry(self.spreadsheet_id, item_data)
+        return result
+
     def get_inventory_status(self):
         """Get current inventory status"""
         return self.sheets_service.get_inventory_data(self.spreadsheet_id)

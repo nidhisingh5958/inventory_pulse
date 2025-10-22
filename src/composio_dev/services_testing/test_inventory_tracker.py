@@ -29,7 +29,21 @@ async def test_inventory_tracking():
     print("\n📝 Testing stock update...")
     update_result = tracker.update_stock_level(3, 15)  # Update row 3 to 15 units
     # print(f"Update result: {update_result}")
-    
+
+    # Test 4: Create new stock entry
+    print("\n🆕 Testing new stock entry...")
+    new_item_data = {
+        "item_id": "NB-001",
+        "item_name": "Notebook",
+        "current_stock": 100,
+        "min_threshold": 20,
+        "daily_usage": 10,
+        "supplier": "XYZ Supplies",
+        "unit_cost": 5.0
+    }
+    create_result = tracker.create_new_stock_entry(new_item_data)
+    # print(f"Create result: {create_result}")
+
     # Test 4: Get pending approvals
     print("\n📋 Testing pending approvals...")
     pending = tracker.get_pending_approvals()
