@@ -2,6 +2,20 @@
 
 AI-powered inventory management system with automated forecasting, reorder planning, and approval workflows using Google Sheets, Notion, and Gmail integration via Composio.
 
+## Composio Integration Documentation
+
+**During development, we encountered and solved numerous challenges with Composio integration. All learnings have been documented for future reference:**
+
+| Document | Purpose |
+|----------|---------|
+| 📋 [**COMPOSIO_DOCUMENTATION_INDEX.md**](./COMPOSIO_DOCUMENTATION_INDEX.md) | **START HERE** - Navigation guide for all Composio docs |
+| 📖 [**COMPOSIO_CHALLENGES_AND_SOLUTIONS.md**](./COMPOSIO_CHALLENGES_AND_SOLUTIONS.md) | Detailed breakdown of 10 challenge categories with solutions |
+| ⚡ [**COMPOSIO_QUICK_REFERENCE.md**](./COMPOSIO_QUICK_REFERENCE.md) | Quick reference: commands, code snippets, troubleshooting |
+
+👉 **New to Composio?** Start with the [Documentation Index](./COMPOSIO_DOCUMENTATION_INDEX.md)
+
+---
+
 ## Problem Statement - Industrial Agents (SMB-focussed)
 > Inventory Replenishment Copilot – Track stock in Sheets, forecast depletion via LLMs, update Notion reorder plans, and email approvals via Gmail.
 
@@ -35,13 +49,15 @@ AI-powered inventory management system with automated forecasting, reorder plann
 ### **Note on Current Implementation**  
 The integration of automation workflows via **Composio (Sheets, Notion, Gmail)** is **under active development**. During implementation, several challenges were encountered due to **limited and unclear Composio documentation**, which affected seamless functionality and slowed progress.
 
-All encountered issues, debugging steps, and temporary workarounds have been **extensively documented** in the `FrictionLog.md` file for transparency and future reference.  
-📄 **Access Here:** `docs/FrictionLog.md`
+All encountered issues, debugging steps, and comprehensive solutions have been **extensively documented** in the comprehensive guide for transparency and future reference:
+
+📄 **Composio Challenges & Solutions Documentation:** [`COMPOSIO_CHALLENGES_AND_SOLUTIONS.md`](./COMPOSIO_CHALLENGES_AND_SOLUTIONS.md)  
+*Complete guide to all Composio integration challenges, solutions implemented, best practices, and lessons learned.*
 
 ### **Working Prototype Available**  
 While the Composio-powered version is still being refined, a **fully functional prototype of the workflow is available** using an alternative implementation approach.  
 📂 **To explore the working implementation, visit:**  
-`/src/working_version/` *(replace with your actual directory path)*
+[GitHub Link](https://github.com/nidhisingh5958/inventory_pulse/tree/main/src/working_code)
 
 ---
 
