@@ -1,4 +1,6 @@
+import asyncio
 import json
+import traceback
 from composio import ComposioToolSet, App
 import os
 from dotenv import load_dotenv
@@ -7,6 +9,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 from google import genai
 from composio_gemini import GeminiProvider
+from config.redis_cofig import redis_client
 from google.genai import types
 
 
@@ -16,6 +19,8 @@ load_dotenv()
 USER_ID = os.getenv("COMPOSIO_USER_ID", "default-user")  # Use a unique user ID for your app
 toolset = ComposioToolSet(entity_id=USER_ID)
 
+LOGGER_SERVICE = 'composio'
+LOGGER_INTEGRATION = 'composio logs'
 
 # Auth Config ID from your Composio dashboard
 # You should have created this in the Composio dashboard for Gmail
@@ -128,3 +133,64 @@ def convert_string_to_json(json_string: str):
     except json.JSONDecodeError as e:
         print(f"Error decoding JSON string: {e}")
         return None
+    
+# ✅ Background listener function
+async def redis_listener():
+    """Continuously listen for Redis messages"""
+    pubsub = redis_client.pubsub()
+    await pubsub.subscribe("low_stock_alerts")
+    print("✅ Subscribed to low_stock_alerts channel...")
+
+    while True:
+        try:
+            msg = await pubsub.get_message(ignore_subscribe_messages=True, timeout=1)
+
+            if msg is None:
+                await asyncio.sleep(0.1)  # Prevent CPU spinning
+                continue
+
+            print(f"📥 Raw Redis message: {msg}")
+            alert_data = json.loads(msg["data"])
+            print(f"Parsed Alert Data: {alert_data}")
+
+            print("✉️ Invoking Gemini draft email function...")
+            res = gemini_draft_email(
+                recipient_email=alert_data["email"],
+                context=(
+                    f"I am running low on stocks, draft an email to my supplier {alert_data['supplier']}.\n"
+                    f"Current stock left: {alert_data['new_stock_left']} units, "
+                    f"Daily demand: {alert_data['demand']} units. "
+                    "Request to replenish as soon as possible."
+                )
+            )
+            print(f"Draft email: {res}")
+            json_res = convert_string_to_json(res)
+            print("type of json_res:", type(json_res))
+
+            if json_res is None:
+                print("❌ AI response is not valid JSON, skipping email send.")
+                return {"status": "error", "message": "AI response is not valid JSON."}
+
+            try:
+                print("📨 Sending email via Composio...")
+                result = toolset.execute_action(
+                    action="GMAIL_SEND_EMAIL",
+                    params={
+                        "recipient_email": json_res['recipient_email'],
+                        "subject": json_res['subject'],
+                        "body": json_res['body']
+                    }
+                )
+                print("✅ Email sent successfully!")
+
+            except Exception as e:
+                print(f"❌ Error while sending email: {e}")
+                traceback.print_exc()
+
+        except asyncio.CancelledError:
+            print("❗ Listener task cancelled.")
+            break
+        except Exception as e:
+            print(f"❌ Error in listener: {e}")
+            traceback.print_exc()
+            await asyncio.sleep(1)  # Wait before retrying

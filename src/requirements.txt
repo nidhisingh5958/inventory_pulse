@@ -12,3 +12,4 @@ composio
 composio_core
 composio_tools
 aioredis
+scalar-fastapi

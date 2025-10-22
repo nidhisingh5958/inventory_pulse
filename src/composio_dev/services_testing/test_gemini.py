@@ -9,10 +9,6 @@ from helper.utils import toolset, execute_tool
 # Load environment variables
 load_dotenv()
 
-
-
-
-
 if __name__ == "__main__":
     res = gemini_draft_email(
         recipient_email="recipient@example.com",
