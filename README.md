@@ -248,8 +248,8 @@ class InventoryTracker:
 
 2. Access the API documentation at:
    ```bash
-   http://127.0.0.1:8005/docs
-   # for detailed docs visit 👉 http://127.0.0.1:8005/scalar
+   http://127.0.0.1:8000/docs
+   # for detailed docs visit 👉 http://127.0.0.1:8000/scalar
    ```
 
 
