@@ -55,8 +55,8 @@ class InventoryTracker:
                 "item_name": item["item_name"],
                 "new_stock_left": item["current_stock"],
                 "demand": 100,
-                "supplier": 'Nidhi Singh',  # Placeholder supplier name
-                "email": 'nidhisingh5958@gmail.com'  # Placeholder supplier email
+                "supplier": 'Jhon Doe',  # Placeholder supplier name
+                "email": 'ABC@gmail.com'  # Placeholder supplier email
             }
             await redis_client.publish("low_stock_alerts", json.dumps(alert_data))
         

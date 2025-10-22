@@ -8,14 +8,14 @@ import json
 
 
 NEW_MOCK_DATA = {
-    "email": "madhurprakash2005@gmail.com",
+    "email": "ABC@gmail.com",
     "new_stock_left": 50,
     "demand": 30,
     "supplier": "ABC Suppliers",
 }
 
 PREVIOUS_MOCK_DATA = {
-    "email": "madhurprakash2005@gmail.com",
+    "email": "ABC@gmail.com",
     "stock_left": 100,
     "demand": 30,
     "supplier": "ABC Suppliers",

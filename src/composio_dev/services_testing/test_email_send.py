@@ -31,7 +31,7 @@ try:
     result = toolset.execute_action(
         action="GMAIL_SEND_EMAIL",
         params={
-            "recipient_email": "madhurprakash2005@gmail.com",
+            "recipient_email": "ABC@gmail.com",
             "subject": "Direct Test from Composio",
             "body": "This is a direct test email sent via Composio without Gemini"
         }
