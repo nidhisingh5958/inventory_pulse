@@ -7,6 +7,7 @@ AI-powered inventory management system with automated forecasting, reorder plann
 **All Composio integration challenges have been resolved and comprehensively documented:**
 
 📋 [**Friction Log.md**](./Friction_Log.md)  
+
 Complete documentation of all Composio challenges encountered, debugging steps, and solutions implemented.
 
 ---
