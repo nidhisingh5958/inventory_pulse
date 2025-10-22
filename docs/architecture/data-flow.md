@@ -1,4 +1,4 @@
-# 📊 Data Flow
+# Data Flow
 
 ## Pipeline Overview
 
@@ -103,10 +103,10 @@ except Exception as e:
 - Log validation errors
 - Continue processing valid items
 
-## 🔗 Navigation
-- ⬅️ [Docs Home](../README.md)
-- ⬅️ [Architecture Overview](system-overview.md)
-- ⬅️ [Workflow Guide](workflow.md)
-- 🔧 [Services API](../api/services.md)
-- 📋 [Data Models](../api/models.md)
-- 🧪 [Testing Guide](../api/testing.md)
+## Navigation
+- [Docs Home](../README.md)
+- [Architecture Overview](system-overview.md)
+- [Workflow Guide](workflow.md)
+- [Services API](../api/services.md)
+- [Data Models](../api/models.md)
+- [Testing Guide](../api/testing.md)

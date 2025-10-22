@@ -1,4 +1,4 @@
-# 🌍 Environment Configuration
+# Environment Configuration
 
 ## Environment Variables Reference
 
@@ -18,7 +18,7 @@
 | `SPREADSHEET_ID` | Google Sheets ID | None | Default inventory sheet |
 | `NOTION_DATABASE_ID` | Notion database ID | None | Default reorder database |
 
-## 📝 .env File Template
+## .env File Template
 
 Create `.env` in project root:
 
@@ -48,7 +48,7 @@ DEBUG=true
 LOG_LEVEL=INFO
 ```
 
-## 🔑 Getting API Keys
+## Getting API Keys
 
 ### 1. Composio Setup
 
@@ -135,7 +135,7 @@ Run validation:
 python validate_env.py
 ```
 
-## 🛡️ Security Best Practices
+## Security Best Practices
 
 ### 1. Environment File Security
 
@@ -161,7 +161,7 @@ COMPOSIO_API_KEY=dev_key_here
 GEMINI_API_KEY=dev_key_here
 ```
 
-## 🔄 Environment Loading
+## Environment Loading
 
 The application loads environment variables in this order:
 
@@ -183,9 +183,9 @@ api_key = os.getenv("COMPOSIO_API_KEY")
 user_id = os.getenv("COMPOSIO_USER_ID", "default-user")
 ```
 
-## 🔗 Navigation
-- ⬅️ [Docs Home](../README.md)
-- ⬅️ [Installation](installation.md)
-- ➡️ [Authentication Setup](authentication.md)
-- 🏗️ [Architecture Overview](../architecture/system-overview.md)
-- 🧪 [Testing Guide](../api/testing.md)
+## Navigation
+- [Docs Home](../README.md)
+- [Installation](installation.md)
+- [Authentication Setup](authentication.md)
+- [Architecture Overview](../architecture/system-overview.md)
+- [Testing Guide](../api/testing.md)

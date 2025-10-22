@@ -1,4 +1,4 @@
-# 🤖 Inventory Pulse 
+# Inventory Pulse 
 
 AI-powered inventory management system with automated forecasting, reorder planning, and approval workflows using Google Sheets, Notion, and Gmail integration via Composio.
 
@@ -6,9 +6,8 @@ AI-powered inventory management system with automated forecasting, reorder plann
 
 **All Composio integration challenges have been resolved and comprehensively documented:**
 
-📋 [**Friction Log.md**](./Friction_Log.md)  
+[**Friction Log.md**](./Friction_Log.md)  
 
-Complete documentation of all Composio challenges encountered, debugging steps, and solutions implemented.
 
 ---
 
@@ -52,7 +51,7 @@ All challenges, solutions, and implementation details have been **comprehensivel
 
 ### **Production-Ready Implementation Available**  
 The Composio-powered version is **fully functional and production-ready** with comprehensive error handling, fallback mechanisms, and robust implementations.  
-📂 **To explore the complete working implementation:**  
+**To explore the complete working implementation:**  
 [Working Code Directory](https://github.com/nidhisingh5958/inventory_pulse/tree/main/src/working_code)
 
 ---
@@ -63,29 +62,29 @@ The Composio-powered version is **fully functional and production-ready** with c
 
 ---
 
-## 🚀 Features
+## Features
 
-- **📊 Google Sheets Integration**: Real-time inventory tracking
-- **🤖 AI Forecasting**: Groq LLM-powered depletion prediction
-- **📝 Notion Planning**: Automated reorder plan creation
-- **📧 Gmail Notifications**: Approval request automation
-- **🔄 Complete Workflow**: End-to-end automation
+- **Google Sheets Integration**: Real-time inventory tracking
+- **AI Forecasting**: Groq LLM-powered depletion prediction
+- **Notion Planning**: Automated reorder plan creation
+- **Gmail Notifications**: Approval request automation
+- **Complete Workflow**: End-to-end automation
 
 ---
 
-## 🎯 What This Agent Does
+## What This Agent Does
 
 **Problem Solved**: Manual inventory management is time-consuming, error-prone, and leads to stockouts or overstock situations.
 
 **Solution**: Automated AI agent that:
-- 📊 **Monitors** inventory levels in Google Sheets
-- 🚨 **Detects** low stock situations automatically  
-- 🤖 **Generates** professional supplier emails using Gemini AI
-- 📧 **Sends** reorder requests via Gmail
-- 📝 **Creates** structured reorder plans in Notion
-- ⚡ **Processes** everything in real-time via Redis
+- **Monitors** inventory levels in Google Sheets
+- **Detects** low stock situations automatically
+- **Generates** professional supplier emails using Gemini AI
+- **Sends** reorder requests via Gmail
+- **Creates** structured reorder plans in Notion
+- **Processes** everything in real-time via Redis
 
-## 💡 Why It's Innovative
+## Why It's Innovative
 
 - **AI-First Approach**: Uses Gemini AI for contextual, professional communication
 - **Zero-Code Integration**: Composio handles all API complexities
@@ -96,7 +95,7 @@ The Composio-powered version is **fully functional and production-ready** with c
 
 ---
 
-## 🏗️ System Architecture
+## System Architecture
 
 ```
 ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
@@ -136,7 +135,7 @@ The Composio-powered version is **fully functional and production-ready** with c
 
 ---
 
-## 🔄 Complete Workflow
+## Complete Workflow
 
 ### **Phase 1: Inventory Monitoring**
 ```
@@ -280,7 +279,7 @@ class InventoryTracker:
    ```
 
 
-## 🧪 Testing
+## Testing
 
 ### **Quick Tests**
 ```bash
@@ -295,11 +294,11 @@ python composio_dev/services_testing/test_inventory_tracker.py
 ---
 
 ### **Status**
-- ✅ **Working**: Gmail, AI email generation, Redis messaging, Sheets reading
-- 🚧 **In Progress**: Complete CRUD operations for Notion integration
-- 📋 **Planned**: Webhooks, ML forecasting, approval workflows
+- **Working**: Gmail, AI email generation, Redis messaging, Sheets reading
+- **In Progress**: Complete CRUD operations for Notion integration
+- **Planned**: Webhooks, ML forecasting, approval workflows
 
-## 📊 Data Flow Example
+## Data Flow Example
 
 ### **Sample Inventory Data** (Google Sheets)
 | Item ID | Item Name | Current Stock | Min Threshold | Daily Usage | Supplier | Unit Cost |
@@ -344,17 +343,17 @@ python composio_dev/services_testing/test_inventory_tracker.py
 ## 📚 Documentation
 
 **Quick Links:**
-- 🚀 [Setup Guide](docs/setup/installation.md) - Installation & environment
-- 🔐 [Authentication](docs/setup/authentication.md) - Composio OAuth setup
-- 🏗️ [Architecture](docs/architecture/system-overview.md) - System design
-- 🔄 [Workflow](docs/architecture/workflow.md) - Process flow
-- 📊 [Data Flow](docs/architecture/data-flow.md) - Data pipeline
-- 🔧 [Services API](docs/api/services.md) - Service documentation
-- 📋 [Data Models](docs/api/models.md) - Schema definitions
-- 🧪 [Testing](docs/api/testing.md) - Test guides
-- 📚 [Docs Overview](docs/README.md) - Documentation index
+- [Setup Guide](docs/setup/installation.md) - Installation & environment
+- [Authentication](docs/setup/authentication.md) - Composio OAuth setup
+- [Architecture](docs/architecture/system-overview.md) - System design
+- [Workflow](docs/architecture/workflow.md) - Process flow
+- [Data Flow](docs/architecture/data-flow.md) - Data pipeline
+- [Services API](docs/api/services.md) - Service documentation
+- [Data Models](docs/api/models.md) - Schema definitions
+- [Testing](docs/api/testing.md) - Test guides
+- [Docs Overview](docs/README.md) - Documentation index
 
-## 🤝 Contributing
+## Contributing
 
 1. Fork & create feature branch
 2. Follow existing patterns

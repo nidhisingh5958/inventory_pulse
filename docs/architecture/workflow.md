@@ -1,4 +1,4 @@
-# 🔄 Workflow
+# Workflow
 
 ## Complete Process Flow
 
@@ -82,9 +82,9 @@ Body: Dear Supplier, we need to reorder Pens (8/10 units)...
 |------|-------|-----------|----------|--------|
 | Pens | 8     | 20        | High     | Pending|
 
-## 🔗 Navigation
-- ⬅️ [Docs Home](../README.md)
-- ⬅️ [Architecture Overview](system-overview.md)
-- 📊 [Data Flow Details](data-flow.md)
-- 🔧 [Services API](../api/services.md)
-- 🧪 [Testing Guide](../api/testing.md)
+## Navigation
+- [Docs Home](../README.md)
+- [Architecture Overview](system-overview.md)
+- [Data Flow Details](data-flow.md)
+- [Services API](../api/services.md)
+- [Testing Guide](../api/testing.md)

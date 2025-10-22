@@ -1,4 +1,4 @@
-# 🏗️ Architecture
+# Architecture
 
 ## System Overview
 ```
@@ -55,10 +55,10 @@ Google Sheets ──┐    ┌── Notion
 - **Repository**: Abstracted data access
 - **Configuration-Driven**: Environment-based setup
 
-## 🔗 Navigation
-- ⬅️ [Docs Home](../README.md)
-- 🚀 [Setup Guide](../setup/installation.md)
-- 🔄 [Workflow Details](workflow.md)
-- 📊 [Data Flow](data-flow.md)
-- 🔧 [Services API](../api/services.md)
-- 🧪 [Testing Guide](../api/testing.md)
+## Navigation
+- [Docs Home](../README.md)
+- [Setup Guide](../setup/installation.md)
+- [Workflow Details](workflow.md)
+- [Data Flow](data-flow.md)
+- [Services API](../api/services.md)
+- [Testing Guide](../api/testing.md)

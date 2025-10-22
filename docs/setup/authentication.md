@@ -1,10 +1,10 @@
-# 🔐 Authentication Setup
+# Authentication Setup
 
 ## Overview
 
 The system uses Composio for managing OAuth2 connections to Google Sheets, Gmail, and Notion. This guide walks through setting up each integration.
 
-## 🏗️ Composio Platform Setup
+## Composio Platform Setup
 
 ### 1. Create Composio Account
 
@@ -25,7 +25,7 @@ The system uses Composio for managing OAuth2 connections to Google Sheets, Gmail
 COMPOSIO_USER_ID=inventory-copilot-{generate-uuid}
 ```
 
-## 📧 Gmail Integration
+## Gmail Integration
 
 ### 1. Create Gmail Auth Config
 
@@ -151,7 +151,7 @@ if __name__ == "__main__":
     test_sheets()
 ```
 
-## 📝 Notion Integration
+## Notion Integration
 
 ### 1. Create Notion Integration
 
@@ -281,10 +281,10 @@ if __name__ == "__main__":
     print(f"\n{'✅ All services connected!' if all_connected else '❌ Some services need setup'}")
 ```
 
-## 🔗 Navigation
-- ⬅️ [Docs Home](../README.md)
-- ⬅️ [Installation](installation.md)
-- ⬅️ [Environment Config](environment.md)
-- 🏗️ [Architecture Overview](../architecture/system-overview.md)
-- 🔄 [Workflow Guide](../architecture/workflow.md)
-- 🧪 [Testing Guide](../api/testing.md)
+## Navigation
+- [Docs Home](../README.md)
+- [Installation](installation.md)
+- [Environment Config](environment.md)
+- [Architecture Overview](../architecture/system-overview.md)
+- [Workflow Guide](../architecture/workflow.md)
+- [Testing Guide](../api/testing.md)

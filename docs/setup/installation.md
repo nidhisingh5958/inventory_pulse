@@ -1,4 +1,4 @@
-# 📦 Installation Guide
+# Installation Guide
 
 ## Prerequisites
 
@@ -62,7 +62,7 @@ python composio_dev/services_testing/test_inventory_tracker.py
 
 Choose option 1 to test individual services.
 
-## 📋 Dependencies
+## Dependencies
 
 ### Core Dependencies
 ```
@@ -117,9 +117,9 @@ for var in required_vars:
     print(f"{var}: {'✅ Set' if value else '❌ Missing'}")
 ```
 
-## 🔗 Navigation
-- ⬅️ [Docs Home](../README.md)
-- ➡️ [Environment Config](environment.md)
-- ➡️ [Authentication Setup](authentication.md)
-- 🏗️ [Architecture Overview](../architecture/system-overview.md)
-- 🧪 [Testing Guide](../api/testing.md)
+## Navigation
+- [Docs Home](../README.md)
+- [Environment Config](environment.md)
+- [Authentication Setup](authentication.md)
+- [Architecture Overview](../architecture/system-overview.md)
+- [Testing Guide](../api/testing.md)
