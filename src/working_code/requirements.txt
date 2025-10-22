@@ -1,0 +1,57 @@
+# Core dependencies
+composio-core
+composio_tools
+
+# Google Sheets integration
+google-api-python-client
+google-auth-httplib2
+google-auth-oauthlib
+gspread
+google-genai
+
+# Notion integration
+notion-client
+
+# Email functionality
+secure-smtplib
+email-validator
+
+# Environment management
+python-dotenv
+
+# Data processing
+pandas
+numpy
+
+# HTTP requests
+requests
+httpx
+
+# Web framework for webhook server
+fastapi
+uvicorn[standard]
+
+# Logging and monitoring
+loguru
+
+# Configuration management
+pydantic
+pydantic-settings
+
+# Async support
+asyncio-mqtt
+aiohttp
+
+# Testing (dev dependencies)
+pytest
+pytest-asyncio
+pytest-mock
+
+# Code quality (dev dependencies)
+black
+flake8
+mypy
+
+# Documentation (dev dependencies)
+mkdocs
+mkdocs-material

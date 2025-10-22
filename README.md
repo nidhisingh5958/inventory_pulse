@@ -31,6 +31,21 @@ AI-powered inventory management system with automated forecasting, reorder plann
 *All technical details are documented in markdown files, including system architecture, implementation details.*
 
 ## Source Code
+
+### **Note on Current Implementation**  
+The integration of automation workflows via **Composio (Sheets, Notion, Gmail)** is **under active development**. During implementation, several challenges were encountered due to **limited and unclear Composio documentation**, which affected seamless functionality and slowed progress.
+
+All encountered issues, debugging steps, and temporary workarounds have been **extensively documented** in the `FrictionLog.md` file for transparency and future reference.  
+📄 **Access Here:** `docs/FrictionLog.md`
+
+### **Working Prototype Available**  
+While the Composio-powered version is still being refined, a **fully functional prototype of the workflow is available** using an alternative implementation approach.  
+📂 **To explore the working implementation, visit:**  
+`/src/working_version/` *(replace with your actual directory path)*
+
+---
+
+
 [GitHub Repository](https://github.com/nidhisingh5958/inventory_pulse/tree/main/src)  
 *Complete backend source code with all modules, dependencies, and configurations for successful installation and execution.*
 
