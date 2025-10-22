@@ -25,7 +25,7 @@ Google Sheets ↔ Composio ↔ FastAPI ↔ Notion
 ### **Current Status**
 - ✅ **Gmail**: Working with comprehensive error handling
 - ✅ **Google Sheets**: Functional with fallback mechanisms
-- ✅ **Notion**: Production-ready with proper property formatting
+- ✅ **Notion**: Working with robust error handling
 - ✅ **Overall**: Robust implementation with hybrid approach
 
 ---
@@ -890,21 +890,13 @@ def composio_action_template(action, params):
 
 ## 📞 Resources
 
-### Internal Files
-- Working Implementations: `src/working_code/src/connectors/`
-- Utility Helpers: `src/composio_dev/helper/utils.py`
-- Services: `src/composio_dev/services/`
-- Configuration Examples: `.env.example`
-
 ### Documentation
-- Setup Guide: `docs/setup/authentication.md`
-- Environment Config: `docs/setup/environment.md`
-- Installation: `docs/setup/installation.md`
+- [Setup Guide](docs/setup/authentication.md)
+- [Environment Config](docs/setup/environment.md)
+- [Installation](docs/setup/installation.md)
 
 ### External Resources
 - [Composio Official Docs](https://docs.composio.dev)
-- [Composio GitHub](https://github.com/composio/composio)
-- [Composio Discord](https://discord.gg/composio)
 
 ---
 
