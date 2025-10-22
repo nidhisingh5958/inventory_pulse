@@ -25,7 +25,7 @@ class SheetsService:
             print(f"Error checking Sheets connection: {e}")
             self.connected = False
     
-    def get_inventory_data(self, spreadsheet_id: str, range_name: str = "A:G"):
+    def get_inventory_data(self, spreadsheet_id: str):
         """Get inventory data from Google Sheets"""
         if not self.connected:
             return {"error": "Google Sheets not connected"}
@@ -155,6 +155,60 @@ class SheetsService:
         except Exception as e:
             return {"error": f"Failed to create new stock entry: {str(e)}"}
 
+
+    def get_row_by_id(self, spreadsheet_id: str, item_id: str):
+        """Get a specific row by item ID"""
+        if not self.connected:
+            return {"error": "Google Sheets not connected"}
+        
+        try:
+            data = self.get_inventory_data(spreadsheet_id)
+            if "error" in data:
+                return data
+            
+            values = data.get("values", [])
+            headers = values[0] if values else []
+            
+            for i, row in enumerate(values[1:], 2):  # Start from row 2
+                if len(row) >= 1 and row[0] == item_id:
+                    item_data = {
+                        "row": i,
+                        "item_id": row[0],
+                        "item_name": row[1] if len(row) > 1 else "",
+                        "current_stock": int(row[2]) if len(row) > 2 and row[2].isdigit() else 0,
+                        "min_threshold": int(row[3]) if len(row) > 3 and row[3].isdigit() else 0,
+                        "supplier": row[5] if len(row) > 5 else "",
+                        "unit_cost": row[6] if len(row) > 6 else ""
+                    }
+                    return item_data
+            return {"error": f"Item ID {item_id} not found"}
+        except Exception as e:
+            return {"error": f"Failed to retrieve item: {str(e)}"}
+        
+    def delete_item(self, spreadsheet_id: str, item_id: str):
+        """Delete an item by item ID"""
+        if not self.connected:
+            return {"error": "Google Sheets not connected"}
+        
+        try:
+            item_data = self.get_row_by_id(spreadsheet_id, item_id)
+            if "error" in item_data:
+                return item_data
+            
+            row_to_delete = item_data["row"]
+            
+            result = self.toolset.execute_action(
+                action="GOOGLESHEETS_DELETE_ROWS",
+                params={
+                    "spreadsheetId": spreadsheet_id,
+                    "sheetId": 0,  # Assuming first sheet; adjust if necessary
+                    "startIndex": row_to_delete - 1,  # Zero-based index
+                    "endIndex": row_to_delete
+                }
+            )
+            return result
+        except Exception as e:
+            return {"error": f"Failed to delete item: {str(e)}"}
 
     def track_stock_changes(self, spreadsheet_id: str):
         """Track and return items with low stock"""

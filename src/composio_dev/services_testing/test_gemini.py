@@ -2,9 +2,7 @@ import os
 import sys
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 from helper.utils import gemini_draft_email
-
 from dotenv import load_dotenv
-from helper.utils import toolset, execute_tool
 
 # Load environment variables
 load_dotenv()

@@ -3,10 +3,12 @@ import sys
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 from services.inventory_tracker import InventoryTracker
 import asyncio
+from dotenv import load_dotenv
+load_dotenv()
 
 # Test configuration
-SPREADSHEET_ID = os.getenv("SPREADSHEET_ID")  # Replace with actual ID
-NOTION_DATABASE_ID = os.getenv("NOTION_DATABASE_ID")  # Replace with actual ID
+SPREADSHEET_ID = os.getenv("SPREADSHEET_ID", "YOUR_SPREADSHEET_ID_HERE")  # Replace with actual ID
+NOTION_DATABASE_ID = os.getenv("NOTION_DATABASE_ID", "YOUR_NOTION_DATABASE_ID_HERE")  # Replace with actual ID
 
 async def test_inventory_tracking():
     """Test the complete inventory tracking workflow"""

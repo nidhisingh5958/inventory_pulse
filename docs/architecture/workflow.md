@@ -35,16 +35,6 @@ Inventory      Reorder Plans  Notion
 
 ## Current Implementation
 
-### Mock Testing
-```python
-# Simulate low stock
-NEW_MOCK_DATA = {"new_stock_left": 20, "demand": 30}
-
-# Trigger alert
-if new_stock < previous_stock:
-    await redis_client.publish("low_stock_alerts", json.dumps(data))
-```
-
 ### Redis Listener
 ```python
 async def redis_listener():

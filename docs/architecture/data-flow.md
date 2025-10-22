@@ -85,20 +85,7 @@ def sanitize_data(raw):
     }
 ```
 
-## Performance Metrics
-
-### Processing Times
-- Sheets read: ~500ms
-- Low stock detection: ~50ms  
-- AI email generation: ~2s
-- Gmail send: ~1s
-- Notion creation: ~800ms
-
-### Scalability Limits
-- Google Sheets: 10M cells
-- Notion API: 3 req/sec
-- Gmail API: 1B quota/day
-- Redis: Memory-based
+---
 
 ## Error Handling
 

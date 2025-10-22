@@ -4,11 +4,11 @@
 
 ### Individual Services
 ```bash
-# Test Sheets connection
-python composio_dev/services_testing/test_sheets_actions.py
+# Test Sheets connection and CRUD operations
+python composio_dev/services_testing/test_crud_operations.py
 
 # Test AI email generation  
-python composio_dev/services_testing/test_gemini.py
+python composio_dev/services_testing/test_email_send.py
 
 # Test Notion integration
 python composio_dev/services_testing/test_notion_actions.py
@@ -18,26 +18,17 @@ python composio_dev/services_testing/test_notion_actions.py
 ```bash
 # Complete integration test
 python composio_dev/services_testing/test_inventory_tracker.py
-
-# Redis messaging test
-python composio_dev/services_testing/mock_testing.py
 ```
 
-### API Endpoints
+## Redis messaging test
+
 ```bash
 # Start server
-python app.py
+cd inventory_pulse/src
+uvicorn app:app --port 8000 --reload
 
 # Test alert simulation
 curl -X POST "http://localhost:8000/simulate_low_stock_alert/"
-```
-
-## Test Configuration
-
-Update test files with your IDs:
-```python
-SPREADSHEET_ID = "your_google_sheets_id"
-NOTION_DATABASE_ID = "your_notion_database_id"
 ```
 
 ## Expected Results
@@ -46,8 +37,8 @@ NOTION_DATABASE_ID = "your_notion_database_id"
 - Gmail OAuth2 connection
 - AI email generation & parsing
 - Redis pub/sub messaging
-- Google Sheets data reading
-- Notion page creation
+- Google Sheets CRUD operations
+- Notion page actions
 
 ### Test Output
 ```
